@@ -44,25 +44,6 @@
 
 	<build>
 		<plugins>
-<!--			<plugin>-->
-<!--				<groupId>org.graalvm.buildtools</groupId>-->
-<!--				<artifactId>native-maven-plugin</artifactId>-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<id>generate-native-image</id>-->
-<!--						<phase>package</phase>-->
-<!--						<configuration>-->
-<!--							<buildArgs>-->
-<!--								<arg>-H:+StaticExecutableWithDynamicLibC</arg>-->
-<!--							</buildArgs>-->
-<!--						</configuration>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
-<!--			<plugin>-->
-<!--				<groupId>org.springframework.boot</groupId>-->
-<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--			</plugin>-->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
