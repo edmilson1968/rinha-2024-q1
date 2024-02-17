@@ -30,7 +30,7 @@ public class TransacoesRepository {
                   , :tipo
                   , :descricao
                   , :realizada_em
-                );
+                )
                 """)
                 .param("id_clientes", transacao.getIdClientes())
                 .param("valor", transacao.getValor())

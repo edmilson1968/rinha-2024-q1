@@ -4,12 +4,17 @@ import br.com.edm.app.rinha.model.*;
 import br.com.edm.app.rinha.repositories.ClientesRepository;
 import br.com.edm.app.rinha.repositories.TransacoesRepository;
 import br.com.edm.app.rinha.service.ClientesService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.verification.VerificationMode;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.json.GsonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
@@ -36,6 +41,24 @@ class Rinha2024Q1ApplicationTests {
 		transacoesRepository = mock(TransacoesRepository.class);
 		clientesService = new ClientesService(clientesRepository, transacoesRepository);
 	}
+
+//	@ParameterizedTest
+//	@ValueSource(strings = {
+//			"{\"valor\": 1.2, \"tipo\": \"d\", \"descricao\": \"devolve\"}",
+//			"{\"valor\": 1, \"tipo\": \"x\", \"descricao\": \"devolve\"}",
+//			"{\"valor\": 1, \"tipo\": \"c\", \"descricao\": \"123456789 e mais um pouco\"}",
+//			"{\"valor\": 1, \"tipo\": \"c\", \"descricao\": \"\"}",
+//			"{\"valor\": 1, \"tipo\": \"c\", \"descricao\": null}"
+//	})
+//	void shouldValidateTransacoes(String body) throws JsonProcessingException {
+//		final ObjectMapper objectMapper = new ObjectMapper();
+//		final Transacoes.TransacaoClienteRequest transacaoClienteRequest = objectMapper.readValue(body, Transacoes.TransacaoClienteRequest.class);
+//		final Transacoes transacao = Transacoes.validarTransacao(transacaoClienteRequest);
+//		assertThatThrownBy(() -> transacao.validarTransacao())
+//				.isInstanceOf(ResponseStatusException.class)
+//				.extracting("status")
+//				.isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
+//	}
 
 	@Test
 	void shouldReturnBalance() {

@@ -9,5 +9,4 @@ public record TransacaoExtrato(
         String tipo,
         String descricao,
         @JsonProperty("realizada_em") LocalDateTime realizadaEm
-) {
-}
+) { }
