@@ -1,5 +1,4 @@
-# Using Oracle GraalVM for JDK 17
-FROM container-registry.oracle.com/graalvm/native-image:21-ol8 AS builder
+FROM --platform=linux/amd64 ghcr.io/graalvm/native-image-community:21 AS builder
 
 # Set the working directory to /home/app
 WORKDIR /build
@@ -11,10 +10,12 @@ COPY . /build
 RUN ./mvnw --no-transfer-progress native:compile -Pnative
 
 # The deployment Image
-FROM container-registry.oracle.com/os/oraclelinux:8-slim
+FROM alpine:latest
+
+RUN apk add gcompat libstdc++
 
 EXPOSE 8080
 
 # Copy the native executable into the containers
-COPY --from=builder /build/target/rinha2024Q1 app
+COPY --from=builder /build/target/rinha-2024-q1 app
 ENTRYPOINT ["/app"]
