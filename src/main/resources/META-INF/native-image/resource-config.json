@@ -7,14 +7,6 @@
   }, {
     "pattern":"\\QMETA-INF/services/ch.qos.logback.classic.spi.Configurator\\E"
   }, {
-    "pattern":"\\QMETA-INF/services/jakarta.el.ExpressionFactory\\E"
-  }, {
-    "pattern":"\\QMETA-INF/services/jakarta.validation.ConstraintValidator\\E"
-  }, {
-    "pattern":"\\QMETA-INF/services/jakarta.validation.spi.ValidationProvider\\E"
-  }, {
-    "pattern":"\\QMETA-INF/services/jakarta.validation.valueextraction.ValueExtractor\\E"
-  }, {
     "pattern":"\\QMETA-INF/services/java.lang.System$LoggerFinder\\E"
   }, {
     "pattern":"\\QMETA-INF/services/java.net.spi.InetAddressResolverProvider\\E"
@@ -42,8 +34,6 @@
     "pattern":"\\QMETA-INF/spring.integration.properties\\E"
   }, {
     "pattern":"\\QMETA-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports\\E"
-  }, {
-    "pattern":"\\QMETA-INF/validation.xml\\E"
   }, {
     "pattern":"\\Qapplication-default.properties\\E"
   }, {
@@ -186,8 +176,6 @@
     "pattern":"\\Qorg/springframework/boot/autoconfigure/condition/ConditionalOnNotWarDeployment.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/condition/ConditionalOnProperty.class\\E"
-  }, {
-    "pattern":"\\Qorg/springframework/boot/autoconfigure/condition/ConditionalOnResource.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/condition/ConditionalOnSingleCandidate.class\\E"
   }, {
@@ -350,10 +338,6 @@
     "pattern":"\\Qorg/springframework/boot/autoconfigure/transaction/TransactionAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/transaction/TransactionManagerCustomizationAutoConfiguration.class\\E"
-  }, {
-    "pattern":"\\Qorg/springframework/boot/autoconfigure/validation/PrimaryDefaultValidatorPostProcessor.class\\E"
-  }, {
-    "pattern":"\\Qorg/springframework/boot/autoconfigure/validation/ValidationAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/web/client/NotReactiveWebApplicationCondition$ReactiveWebApplication.class\\E"
   }, {
