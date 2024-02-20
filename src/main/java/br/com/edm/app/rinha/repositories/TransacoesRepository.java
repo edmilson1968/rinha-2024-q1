@@ -3,11 +3,11 @@ package br.com.edm.app.rinha.repositories;
 import br.com.edm.app.rinha.model.TransacaoExtrato;
 import br.com.edm.app.rinha.model.Transacoes;
 import org.springframework.jdbc.core.simple.JdbcClient;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Repository
+@Component
 public class TransacoesRepository {
     private final JdbcClient jdbcClient;
 

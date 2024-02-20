@@ -4,18 +4,9 @@ import br.com.edm.app.rinha.model.*;
 import br.com.edm.app.rinha.repositories.ClientesRepository;
 import br.com.edm.app.rinha.repositories.TransacoesRepository;
 import br.com.edm.app.rinha.service.ClientesService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.verification.VerificationMode;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.json.GsonTester;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -103,34 +94,32 @@ class Rinha2024Q1ApplicationTests {
 	@Test
 	void shouldThrowNotFoundOnAddTransaction() {
 		final Transacoes transacao = new Transacoes(1L, 100000, "d", "descricao", null);
-		when(clientesRepository.updateSaldoCliente(1L, 100000)).thenReturn(0);
+		when(clientesRepository.atualizaSaldoCliente(1L, 100000)).thenReturn(Optional.empty());
 		assertThatThrownBy(
 				() -> clientesService.handleTransacao(1L, transacao)
 		).isInstanceOf(ResponseStatusException.class)
 				.extracting("status")
 				.isEqualTo(HttpStatus.NOT_FOUND);
-		verify(clientesRepository, times(0)).findById(1L);
 		verify(transacoesRepository, times(0)).addTransacao(transacao);
 	}
 
 	@Test
 	void shouldThrowUnprocessableEntityOnAddTransaction() {
 		final Transacoes transacao = new Transacoes(1L, 100000, "d", "descricao", null);
-		when(clientesRepository.updateSaldoCliente(1L, -100000)).thenReturn(1);
+		when(clientesRepository.atualizaSaldoCliente(1L, -100000)).thenReturn(Optional.of(new Clientes(10000, -100001)));
 		when(clientesRepository.findById(1L)).thenReturn(Optional.of(new Clientes(100000, -100001)));
 		assertThatThrownBy(
 				() -> clientesService.handleTransacao(1L, transacao)
 		).isInstanceOf(ResponseStatusException.class)
 				.extracting("status")
 				.isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
-		verify(clientesRepository).findById(1L);
 		verify(transacoesRepository, times(0)).addTransacao(transacao);
 	}
 
 	@Test
 	void shouldAddTransacao() {
 		final Transacoes transacao = Mockito.spy(new Transacoes(1L, 1, "c", "descricao", null));
-		when(clientesRepository.updateSaldoCliente(1L, 1)).thenReturn(1);
+		when(clientesRepository.atualizaSaldoCliente(1L, 1)).thenReturn(Optional.of(new Clientes(100000, 0)));
 		final Clientes cli = new Clientes(100000, 0);
 		when(clientesRepository.findById(1L)).thenReturn(Optional.of(cli));
 		doNothing().when(transacoesRepository).addTransacao(transacao);

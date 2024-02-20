@@ -2,12 +2,12 @@ package br.com.edm.app.rinha.repositories;
 
 import br.com.edm.app.rinha.model.Clientes;
 import org.springframework.jdbc.core.simple.JdbcClient;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
-@Repository
+//@Repository
+@Component
 public class ClientesRepository {
 
     private final JdbcClient jdbcClient;
@@ -24,14 +24,17 @@ public class ClientesRepository {
                 .query(Clientes.class)
                 .optional();
     }
-    public int updateSaldoCliente(Long id, Integer valor) {
+    public Optional<Clientes> atualizaSaldoCliente(Long id, Integer valor) {
         return jdbcClient.sql("""
                 UPDATE clientes SET
                   saldo = saldo + :valor
                 WHERE id = :id
+                RETURNING id, saldo, limite;
                 """)
                 .param("valor", valor)
                 .param("id", id)
-                .update();
+                .query(Clientes.class)
+                .optional()
+                ;
     }
 }

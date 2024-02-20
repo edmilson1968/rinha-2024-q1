@@ -24,17 +24,12 @@ public class ClientesService {
     @Transactional
     public TransacaoClienteResponse handleTransacao(Long id, Transacoes transacao) {
 
-        int ret = clientesRepository.updateSaldoCliente(id, "d".equals(transacao.getTipo()) ? -transacao.getValor() : transacao.getValor());
-        if (ret == 0) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-
-        Clientes cli = clientesRepository.findById(id)
+        Clientes cli = clientesRepository
+                .atualizaSaldoCliente(id, "d".equals(transacao.getTipo()) ? -transacao.getValor() : transacao.getValor())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        if (cli.getSaldo() < -cli.getLimite()) {
+        if (cli.getSaldo() < -cli.getLimite())
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
-        }
 
         transacao.setIdClientes(id);
         transacao.setRealizadaEm(OffsetDateTime.now());
