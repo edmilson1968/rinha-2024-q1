@@ -12,7 +12,7 @@ RUN ./mvnw --no-transfer-progress native:compile -Pnative
 # The deployment Image
 FROM alpine:latest
 
-RUN apk add gcompat libstdc++
+RUN apk add --no-cache gcompat
 
 EXPOSE 8080
 
