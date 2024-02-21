@@ -25,8 +25,7 @@ public class ClientesService {
     public TransacaoClienteResponse handleTransacao(Long id, Transacoes transacao) {
 
         Clientes cli = clientesRepository
-                .atualizaSaldoCliente(id, "d".equals(transacao.getTipo()) ? -transacao.getValor() : transacao.getValor())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .atualizaSaldoCliente(id, "d".equals(transacao.getTipo()) ? -transacao.getValor() : transacao.getValor());
 
         if (cli.getSaldo() < -cli.getLimite())
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
@@ -39,8 +38,7 @@ public class ClientesService {
     }
 
     public ExtratoResponse handleExtratoResponse(Long id) {
-        final Clientes cli = clientesRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        final Clientes cli = clientesRepository.findById(id);
 
         final List<TransacaoExtrato> top10Transacoes = transacoesRepository.getTop10Transacoes(id);
         return new ExtratoResponse(

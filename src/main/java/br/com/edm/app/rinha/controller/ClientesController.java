@@ -27,6 +27,8 @@ public class ClientesController {
 
     @PostMapping(value = "/{id}/transacoes", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TransacaoClienteResponse> transacionar(@PathVariable("id") Long id, @RequestBody String request) {
+        if (id < 1 || id > 5)
+            return ResponseEntity.notFound().build();
         final TransacaoClienteRequest transacaoClienteRequest = validarTransacaoRequest(request);
         if (transacaoClienteRequest != null)
             return ResponseEntity.ok(service.handleTransacao(id, Transacoes.transforma(transacaoClienteRequest)));
@@ -58,6 +60,8 @@ public class ClientesController {
 
     @GetMapping(value = "/{id}/extrato", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ExtratoResponse> extratos(@PathVariable("id") Long id) {
+        if (id < 1 || id > 5)
+            return ResponseEntity.notFound().build();
         return ResponseEntity.ok(service.handleExtratoResponse(id));
     }
 

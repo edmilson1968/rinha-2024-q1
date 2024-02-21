@@ -15,16 +15,16 @@ public class ClientesRepository {
         this.jdbcClient = jdbcClient;
     }
 
-    public Optional<Clientes> findById(Long id) {
+    public Clientes findById(Long id) {
         return jdbcClient
                 .sql("""
                 select * from clientes where id = :id
                 """)
                 .param("id", id)
                 .query(Clientes.class)
-                .optional();
+                .single();
     }
-    public Optional<Clientes> atualizaSaldoCliente(Long id, Integer valor) {
+    public Clientes atualizaSaldoCliente(Long id, Integer valor) {
         return jdbcClient.sql("""
                 UPDATE clientes SET
                   saldo = saldo + :valor
@@ -34,7 +34,7 @@ public class ClientesRepository {
                 .param("valor", valor)
                 .param("id", id)
                 .query(Clientes.class)
-                .optional()
+                .single()
                 ;
     }
 }
